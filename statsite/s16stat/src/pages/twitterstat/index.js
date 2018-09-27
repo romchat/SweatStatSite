@@ -2,12 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { Layout, Menu, Icon, Select, Row, Table } from 'antd';
 import { Line, Bar } from 'react-chartjs-2';
+import { NavLink } from 'react-router-dom';
 
 const { Header, Sider, Content } = Layout;
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
 const Option = Select.Option;
-const { Column } = Table
+const { Column } = Table;
+
+const Container = styled.div`
+  min-height: 100vh;
+`
+
 const RowTable = styled(Table)`
   &.rowCursor {
     cursor: pointer;
@@ -53,7 +59,7 @@ class TwitterStatPage extends React.Component {
         <RowTable>
           <Column title="" />
           <Column title="ชื่อ" />
-          <Column title="ยอดไลค์เพจ" />
+          <Column title="ยอดการติดตาม" />
           <Column title="การเปลี่ยนแปลง" />
         </RowTable>
       )
@@ -62,6 +68,7 @@ class TwitterStatPage extends React.Component {
   }
 
   render() {
+    const pathName = '/twStat';
     return (
       <Layout>
         <Sider
@@ -70,27 +77,35 @@ class TwitterStatPage extends React.Component {
           collapsed={this.state.collapse}
         >
           <BlankSpace />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu theme="dark" mode="inline" defaultSelectedKeys={[pathName]}>
             <SubMenu 
               key="sub1"
               title={<span><Icon type="global"/><span>การใช้ Social</span></span>}
             >
-              <MenuItem key="1">
-                <Icon type="facebook"/>
-                <span>Facebook</span>
+              <MenuItem key="/">
+                <NavLink to ="/fbStat">
+                  <Icon type="facebook"/>
+                  <span>Facebook</span>
+                </NavLink>
               </MenuItem>
-              <MenuItem key="2">
-                <Icon type="twitter"/>
-                <span>Twitter</span>
+              <MenuItem key="/twStat">
+                <NavLink to ="/twStat">
+                  <Icon type="twitter"/>
+                  <span>Twitter</span>
+                </NavLink>
               </MenuItem>
             </SubMenu>
             <MenuItem key="3">
-              <Icon type="youtube"/>
-              <span>Youtube</span>
+              <NavLink to ="/ytStat">
+                <Icon type="youtube"/>
+                <span>Youtube</span>
+              </NavLink>
             </MenuItem>
             <MenuItem key="4">
-              <Icon type="facebook"/>
-              <span>SweatStat</span>
+              <a href="https://www.facebook.com/sweatstat16/" target="_blank">
+                <Icon type="facebook"/>
+                <span>SweatStat</span>
+              </a>
             </MenuItem>
           </Menu>
         </Sider>
@@ -98,17 +113,19 @@ class TwitterStatPage extends React.Component {
           <Header style={{ background: '#001529', padding: 0 }}>
             <HeadText>Sweat Stat</HeadText>
           </Header>
-          <Row style={{marginTop: 20, marginBottom: 10, marginLeft: 20}}>
-            <SelectText>กรุณาเลือกการแสดงผล </SelectText>
-            <Select id="selectType" defaultValue={this.state.chartType} onChange={this.changeType} style={{width: 200}}>
-              <Option value="ranking">Ranking (จัดอันดับ)</Option>
-              <Option value="line">Line Chart (กราฟเส้น)</Option>
-              <Option value="column">Column Chart (แผนภูมิแท่ง)</Option>
-            </Select>
-          </Row>
-          <Content style={{ margin: '0px 20px', padding: 24, background: '#fff', height: '100%'}}>
-            {this.renderChart()}
-          </Content>
+          <Container>
+            <Row style={{marginTop: 20, marginBottom: 10, marginLeft: 20}}>
+              <SelectText>กรุณาเลือกการแสดงผล </SelectText>
+              <Select id="selectType" defaultValue={this.state.chartType} onChange={this.changeType} style={{width: 200}}>
+                <Option value="ranking">Ranking (จัดอันดับ)</Option>
+                <Option value="line">Line Chart (กราฟเส้น)</Option>
+                <Option value="column">Column Chart (แผนภูมิแท่ง)</Option>
+              </Select>
+            </Row>
+            <Content style={{ margin: '0px 20px', padding: 24, background: '#fff', height: '100%'}}>
+              {this.renderChart()}
+            </Content>
+          </Container>
         </Layout>
       </Layout>
     );

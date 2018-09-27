@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Layout, Menu, Icon, Select, Row, Table } from 'antd';
 import { Line, Bar } from 'react-chartjs-2';
 import { NavLink } from 'react-router-dom';
-
 const { Header, Sider, Content } = Layout;
 const MenuItem = Menu.Item;
 const SubMenu = Menu.SubMenu;
@@ -37,7 +36,7 @@ const BlankSpace = styled.div`
   margin: 16px;
 `
 
-class FacebookStatPage extends React.Component {
+class YoutubeStatPage extends React.Component {
 
   constructor(props){
     super(props);
@@ -58,8 +57,8 @@ class FacebookStatPage extends React.Component {
       case 'ranking': return (
         <RowTable>
           <Column title="" />
-          <Column title="ชื่อ" />
-          <Column title="ยอดไลค์เพจ" />
+          <Column title="ชื่อเพลง" />
+          <Column title="ยอดวิว" />
           <Column title="การเปลี่ยนแปลง" />
         </RowTable>
       )
@@ -68,7 +67,7 @@ class FacebookStatPage extends React.Component {
   }
 
   render() {
-    const pathName = '/fbStat';
+    const pathName = '/ytStat';
     return (
       <Layout>
         <Sider
@@ -82,7 +81,7 @@ class FacebookStatPage extends React.Component {
               key="sub1"
               title={<span><Icon type="global"/><span>การใช้ Social</span></span>}
             >
-              <MenuItem key="/fbStat">
+              <MenuItem key="/">
                 <NavLink to ="/fbStat">
                   <Icon type="facebook"/>
                   <span>Facebook</span>
@@ -95,13 +94,13 @@ class FacebookStatPage extends React.Component {
                 </NavLink>
               </MenuItem>
             </SubMenu>
-            <MenuItem key="3">
+            <MenuItem key="/ytStat">
               <NavLink to ="/ytStat">
                 <Icon type="youtube"/>
                 <span>Youtube</span>
               </NavLink>
             </MenuItem>
-            <MenuItem key="4">
+            <MenuItem key="/">
               <a href="https://www.facebook.com/sweatstat16/" target="_blank">
                 <Icon type="facebook"/>
                 <span>SweatStat</span>
@@ -132,4 +131,4 @@ class FacebookStatPage extends React.Component {
   }
 }
 
-export default FacebookStatPage;
+export default YoutubeStatPage;
